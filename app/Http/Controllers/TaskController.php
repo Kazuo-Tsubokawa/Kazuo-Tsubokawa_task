@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Task;
+use App\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
@@ -13,7 +14,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::all();
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -23,7 +25,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.create');
     }
 
     /**
@@ -32,9 +34,16 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        //
+        $task = new Task;
+
+        $task->title = $request->title;
+        $task->body = $request->body;
+
+        $task->save();
+
+        return redirect('/tasks');
     }
 
     /**
@@ -45,7 +54,8 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Task::find($id);
+        return view('tasks.show', ['task' => $task]);
     }
 
     /**
@@ -56,7 +66,8 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::find($id);
+        return view('tasks.edit', ['tasks' => $task]);
     }
 
     /**
@@ -66,9 +77,16 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskRequest $request, $id)
     {
-        //
+        $task = Task::find($id);
+
+        $task->title = $request->title;
+        $task->body = $request->body;
+
+        $task->save();
+
+        return redirect('/tasks');
     }
 
     /**
@@ -79,6 +97,9 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        $task->delete();
+
+        return redirect('/tasks');
     }
 }
