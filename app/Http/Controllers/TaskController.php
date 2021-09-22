@@ -18,14 +18,9 @@ class TaskController extends Controller
         return view('tasks.index', ['tasks' => $tasks]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('tasks.create');
+        return view('tasks.index');
     }
 
     /**
@@ -67,7 +62,7 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
-        return view('tasks.edit', ['tasks' => $task]);
+        return view('tasks.edit', ['task' => $task]);
     }
 
     /**
@@ -83,6 +78,7 @@ class TaskController extends Controller
 
         $task->title = $request->title;
         $task->body = $request->body;
+        $task->timestamps = false;
 
         $task->save();
 

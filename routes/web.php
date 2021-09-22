@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('items', App\Http\Controllers\TaskController::class);
+Route::resource('tasks', App\Http\Controllers\TaskController::class);
