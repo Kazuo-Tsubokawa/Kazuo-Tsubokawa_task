@@ -78,7 +78,6 @@ class TaskController extends Controller
 
         $task->title = $request->title;
         $task->body = $request->body;
-        $task->timestamps = false;
 
         $task->save();
 
