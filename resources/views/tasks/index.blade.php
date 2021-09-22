@@ -22,7 +22,7 @@
             </ul>
         </div>
     @endif
-    
+
     <h1>タスク一覧</h1>
     @foreach ($tasks as $task)
         <div class="task">
